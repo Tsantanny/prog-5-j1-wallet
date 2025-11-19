@@ -5,9 +5,9 @@ namespace App;
 class Wallet
 {
     private string $color;
-    private array $cards = [];
     private float $weight;
     private string $brand;
+    private array $cards = [];
     private float $balance;
 
     public function __construct(
@@ -24,7 +24,6 @@ class Wallet
         $this->balance = $balance;
     }
 
-    // Money management
     public function withdraw(float $amount): float
     {
         if ($amount < 0) {
@@ -49,7 +48,6 @@ class Wallet
         $this->balance += $amount;
     }
 
-    // Cards management
     public function addCard(string $card): string
     {
         if (!in_array($card, $this->cards, true)) {
@@ -59,7 +57,6 @@ class Wallet
         return $card;
     }
 
-    // Lost status
     public function isLost(): bool
     {
         return false;
