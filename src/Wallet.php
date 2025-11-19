@@ -8,20 +8,20 @@ class Wallet
     private array $cards = [];
     private float $weight;
     private string $brand;
-    private float $money;
+    private float $balance;
 
     public function __construct(
         string $color,
         array $cards,
         float $weight,
         string $brand,
-        float $money
+        float $balance
     ) {
         $this->color = $color;
         $this->cards = $cards;
         $this->weight = $weight;
         $this->brand = $brand;
-        $this->money = $money;
+        $this->balance = $balance;
     }
 
     // Money management
@@ -31,11 +31,11 @@ class Wallet
             throw new \InvalidArgumentException("Amount must be positive");
         }
 
-        if ($amount > $this->money) {
+        if ($amount > $this->balance) {
             throw new \InvalidArgumentException("Insufficient funds");
         }
 
-        $this->money -= $amount;
+        $this->balance -= $amount;
 
         return $amount;
     }
@@ -46,12 +46,7 @@ class Wallet
             throw new \InvalidArgumentException("Amount must be positive");
         }
 
-        $this->money += $amount;
-    }
-
-    public function checkMoney(): float
-    {
-        return $this->money;
+        $this->balance += $amount;
     }
 
     // Cards management
@@ -62,16 +57,6 @@ class Wallet
         }
 
         return $card;
-    }
-
-    public function getCards(): array
-    {
-        return $this->cards;
-    }
-
-    public function setCards(array $cards): void
-    {
-        $this->cards = $cards;
     }
 
     // Lost status
@@ -109,5 +94,25 @@ class Wallet
     public function setBrand(string $brand): void
     {
         $this->brand = $brand;
+    }
+
+    public function getCards(): array
+    {
+        return $this->cards;
+    }
+
+    public function setCards(array $cards): void
+    {
+        $this->cards = $cards;
+    }
+
+    public function setBalance(float $balance): void
+    {
+        $this->balance = $balance;
+    }
+
+    public function getBalance(): float
+    {
+        return $this->balance;
     }
 }
