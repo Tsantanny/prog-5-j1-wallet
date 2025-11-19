@@ -7,21 +7,21 @@ class Wallet
     private string $color;
     private float $weight;
     private string $brand;
-    private array $cards = [];
+    private array $cards;
     private float $balance;
 
     public function __construct(
         string $color,
-        array $cards,
         float $weight,
         string $brand,
-        float $balance
+        float $balance,
+        array $cards = []
     ) {
         $this->color = $color;
-        $this->cards = $cards;
         $this->weight = $weight;
         $this->brand = $brand;
         $this->balance = $balance;
+        $this->cards = $cards;
     }
 
     public function withdraw(float $amount): float
