@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="MyProject Rules">
+	<file>
+		src
+	</file>
+	<rule ref="PSR12" />
+	<exclude-pattern>
+		vendor/*
+	</exclude-pattern>
+	<exclude-pattern>
+		*.cache
+	</exclude-pattern>
+	<exclude-pattern>
+		*.tmp
+	</exclude-pattern>
+</ruleset>
