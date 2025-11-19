@@ -6,40 +6,74 @@ class Wallet
 {
     private string $color;
     private string $cardHolder;
-    private string $weight;
+    private float $weight;
     private string $brand;
+    private float $money;
+    private array $cards = [];
 
     public function __construct(
         string $color,
         string $cardHolder,
-        string $weight,
-        string $brand
+        float $weight,
+        string $brand,
+        float $money
     ) {
         $this->color = $color;
         $this->cardHolder = $cardHolder;
         $this->weight = $weight;
         $this->brand = $brand;
+        $this->money = $money;
     }
 
-    public function getMoney(float $amount): float
+    // Money management
+    public function withdraw(float $amount): float
     {
-        return 0.0;
+        if ($amount < 0) {
+            throw new \InvalidArgumentException("Amount must be positive");
+        }
+
+        if ($amount > $this->money) {
+            throw new \InvalidArgumentException("Insufficient funds");
+        }
+
+        $this->money -= $amount;
+        return $amount;
     }
 
-    public function addMoney(float $amount): void {}
+    public function addMoney(float $amount): void
+    {
+        if ($amount < 0) {
+            throw new \InvalidArgumentException("Amount must be positive");
+        }
+
+        $this->money += $amount;
+    }
 
     public function checkMoney(): float
     {
-        return 0.0;
+        return $this->money;
     }
 
-    public function addCard(string $card): void {}
+    // Cards management
+    public function addCard(string $card): array
+    {
+        if (!in_array($card, $this->cards)) {
+            $this->cards[] = $card;
+        }
 
+        return $this->getCards();
+    }
+
+    public function getCards(): array
+    {
+        return $this->cards;
+    }
+
+    // Lost status
     public function isLost(): bool
     {
-        return true;
+        return false;
     }
-
 
     // Getters and Setters
     public function getColor(): string
@@ -62,12 +96,12 @@ class Wallet
         $this->cardHolder = $cardHolder;
     }
 
-    public function getWeight(): string
+    public function getWeight(): float
     {
         return $this->weight;
     }
 
-    public function setWeight(string $weight): void
+    public function setWeight(float $weight): void
     {
         $this->weight = $weight;
     }
